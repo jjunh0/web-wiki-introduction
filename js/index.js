@@ -15,5 +15,32 @@ console.log(
     "    '/__//__/  /_____/ \\/_/\\/_/ /_____/",
   "color: #d81b60; font-size: 16px; font-weight: bold;"
 );
+document.addEventListener('DOMContentLoaded', () => {
+    const commentForm = document.getElementById('comment-form');
+    const commentInput = document.getElementById('comment-input');
+    const commentList = document.querySelector('.comment-list');
 
-console.log("알맞은 스크립트를 작성하세요");
+    commentForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            addComment(commentText);
+            commentInput.value = '';
+            alert('댓글이 등록되었습니다');
+        }
+    });
+
+    function addComment(text) {
+        const li = document.createElement('li');
+        li.innerHTML = `
+      <div class="comment-item">
+        <div class="comment-author">
+          <img src="./images/comment-author-icon.png" alt="사용자 프로필 이미지" />
+          <span>방문자</span>
+        </div>
+        <div class="comment-content">${text}</div>
+      </div>
+    `;
+        commentList.appendChild(li);
+    }
+});
